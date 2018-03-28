@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	</head>
+	<body>
+        <h3>Choose one user's post：</h3>
+		<form action="ViewUserPosts.php" method="post">
+   <?php
+    $mysqli = new mysqli("mysql.eecs.ku.edu", "w802w369", "w456s786", "w802w369");
+    /* check connection */
+    if ($mysqli->connect_errno) {
+        echo "Failing connect with data base: %s\n {$mysqli->connect_error}";
+        exit();
+    }
+     $user = $mysqli->query("SELECT * FROM Users;");
+
+        $mysqli->close();
+      ?>
+      <select name="users" required>
+        <?php
+          while($userRows = $user->fetch_assoc()) {
+            $name = $userRows['user_id'];
+
+            echo("<option value='" . $name . "'> " . $name . "</option>");
+          }
+        ?>
+      </select><br><br>
+    echo "</select>";
+?>
+            <input type="submit">Select</botton>
+        </form>
+	</body>
+</html>
